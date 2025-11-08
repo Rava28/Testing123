@@ -9,16 +9,16 @@ public class PlayerLocomotion : MonoBehaviour
     Transform cameraObject;
     Rigidbody playerRigidbody;
 
-    public float movementSpeed = 7f;
-    public float rotationSpeed = 15f;
+    public float movementSpeed = 7f;     public float rotationSpeed = 15f;
 
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
         playerRigidbody = GetComponent<Rigidbody>();
+        cameraObject = Camera.main.transform;
     }
 
-    public void HandleMovement()
+    private void HandleMovement()
     {
         moveDirection = cameraObject.forward * inputManager.verticalInput;
         moveDirection += cameraObject.right * inputManager.horizontalInput;
@@ -30,8 +30,14 @@ public class PlayerLocomotion : MonoBehaviour
 
         playerRigidbody.linearVelocity = movementVelocity;
     }
+
+    public void HandleAllMovement()
+    {
+        HandleMovement();
+        HandleRotation();
+    }
     
-    public void HandleRotation()
+    private void HandleRotation()
     {
         Vector3 targetDirection = Vector3.zero;
 

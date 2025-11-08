@@ -4,10 +4,16 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     PlayerControls playerControls;
+    AnimatorManager animatorManager;
     public Vector2 movementInput;
+    private float moveAmount;
     public float verticalInput;
     public float horizontalInput;
 
+    private void Awake()
+    {
+        animatorManager = GetComponent<AnimatorManager>();
+    }
     private void OnEnable()
     {
         if (playerControls == null)
@@ -22,10 +28,7 @@ public class InputManager : MonoBehaviour
     {
         playerControls.Disable();
     }
-    
-    private void HandleMovementInput()
+
+    public void HandleAllInputs()
     {
-        verticalInput = movementInput.y;
-        horizontalInput = movementInput.x;
-    }
-}
+        HandleMo
